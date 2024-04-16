@@ -14,4 +14,12 @@ class Application extends Model
     ];
     public $timestamps = true;
 
+    public function company(){
+        return $this->belongsTo('App\Models\Company','company_id','id');
+    }
+
+    public function users(){
+        return $this->belongsToMany('App\Models\User','apply_for','application_id','user_id','id','id');
+    }
+
 }

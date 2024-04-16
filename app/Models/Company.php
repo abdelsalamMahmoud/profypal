@@ -32,4 +32,8 @@ class Company extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function applications(){
+        return $this->hasMany('App\Models\Application','company_id','id');
+    }
+
 }

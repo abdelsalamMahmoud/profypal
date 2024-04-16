@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CompanyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,12 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
 });
+
+
+############### start Company Routes #################
+
+Route::post('/create/{company_id}/application', [CompanyController::class, 'add_application']);
+Route::post('/accept/profile/{id}', [CompanyController::class, 'acceptProfile']);
+Route::post('/reject/profile/{id}', [CompanyController::class, 'rejectProfile']);
+
+############### end Company Routes #################
