@@ -19,7 +19,7 @@ class CreateApplicationsTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('location');
-            $table->enum('flag', [0, 1]); // 0 for not available  1 for available
+            $table->enum('flag', [0, 1])->default('1'); // 0 for not available  1 for available
             $table->timestamps();
         });
     }

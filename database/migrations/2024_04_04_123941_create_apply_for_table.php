@@ -18,7 +18,7 @@ class CreateApplyForTable extends Migration
             $table->foreignId('application_id');
             $table->foreignId('user_id');
             $table->string('cv');
-            $table->enum('status', [0, 1]); // 0 for rejected 1 for accepted
+            $table->enum('status', [0, 1,2])->default('0'); // 0 for pending 1 for accepted 2 for rejected
             $table->timestamps();
         });
     }

@@ -61,13 +61,29 @@ class CompanyController extends Controller
         }
 
         $apply->update([
-            'status'=>'0',
+            'status'=>'2',
         ]);
 
         if($apply){
             return $this->apiResponse($apply,'this application rejected',201);
         }
 
+    }
+
+    public function ban_application($id){
+        $application = Application::find($id);
+
+        if(!$application){
+            return $this->apiResponse(null,'the application not found',404);
+        }
+
+        $application->update([
+            'flag'=>'0',
+        ]);
+
+        if($application){
+            return $this->apiResponse($application,'this application baned',201);
+        }
     }
 
 

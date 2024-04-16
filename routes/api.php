@@ -37,5 +37,6 @@ Route::group([
 Route::post('/create/{company_id}/application', [CompanyController::class, 'add_application']);
 Route::post('/accept/profile/{id}', [CompanyController::class, 'acceptProfile']);
 Route::post('/reject/profile/{id}', [CompanyController::class, 'rejectProfile']);
+Route::post('/ban/application/{id}', [CompanyController::class, 'ban_application']);
 
 ############### end Company Routes #################
