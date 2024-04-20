@@ -15,11 +15,12 @@ class CreateApplicationsTable extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id');
             $table->string('title');
             $table->string('description');
+            $table->string('requirements');
             $table->string('location');
             $table->enum('flag', [0, 1])->default('1'); // 0 for not available  1 for available
+            $table->foreignId('company_id')->constrained('companies')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

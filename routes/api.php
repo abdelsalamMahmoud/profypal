@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,3 +44,11 @@ Route::post('/edit/application/{id}', [CompanyController::class, 'update_applica
 Route::post('/destroy/application/{id}', [CompanyController::class, 'destroy_application']);
 
 ############### end Company Routes #################
+
+
+############### start user Routes #################
+Route::get('/view/applications', [UserController::class, 'view_all_posts']);
+Route::post('/update/profile/{id}', [UserController::class, 'update_profile']);
+Route::post('/apply/for/job/{application_id}', [UserController::class, 'apply_for_job']);
+Route::get('/search/company', [UserController::class, 'search_for_company']);
+############### end user Routes #################

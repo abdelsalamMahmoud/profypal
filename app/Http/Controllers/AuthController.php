@@ -47,12 +47,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|unique:users,email',
             'password' => 'required|string|min:6',
             'phone' => 'required',
-            'bio' => 'required',
             'age' => 'required',
-            'degree' => 'required',
-            'skills' => 'required',
-            'years_of_experience' => 'required',
-            'current_company' => 'required',
         ]);
 
         if ($validator->fails()) {

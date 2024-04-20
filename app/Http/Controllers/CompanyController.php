@@ -24,6 +24,7 @@ class CompanyController extends Controller
         $validator = Validator::make($request->all(),[
             'title'=>'required|max:255',
             'description'=>'required|max:255',
+            'requirements'=>'required|max:255',
             'location'=>'required',
         ]);
 
@@ -34,6 +35,7 @@ class CompanyController extends Controller
         $application = Application::create([
             'title'=>$request->title,
             'description'=>$request->description,
+            'requirements'=>$request->requirements,
             'location'=>$request->location,
             'flag'=>'1',
             'company_id'=>$company_id

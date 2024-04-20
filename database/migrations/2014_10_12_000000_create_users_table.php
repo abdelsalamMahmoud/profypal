@@ -21,12 +21,12 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone');
-            $table->string('bio');
+            $table->string('bio')->nullable();
             $table->integer('age');
-            $table->string('degree');
-            $table->string('skills');
-            $table->string('years_of_experience');
-            $table->string('current_company');
+            $table->string('degree')->nullable();
+            $table->string('skills')->nullable();
+            $table->string('years_of_experience')->nullable();
+            $table->string('current_company')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

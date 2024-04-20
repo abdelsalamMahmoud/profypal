@@ -10,7 +10,7 @@ class Application extends Model
     use HasFactory;
     protected $table = "applications";
     protected $fillable = [
-        'company_id','title' , 'description' , 'location' , 'flag' ,'created_at','updated_at'
+        'company_id','title' , 'description' ,'requirements', 'location' , 'flag' ,'created_at','updated_at'
     ];
     public $timestamps = true;
 

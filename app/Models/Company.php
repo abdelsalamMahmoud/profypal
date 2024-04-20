@@ -14,6 +14,7 @@ class Company extends Authenticatable implements JWTSubject
     protected $fillable = ['username','email','password','info','address','created_at','updated_at'];
 
     public $timestamps = true;
+    protected $hidden=['password','email'];
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
