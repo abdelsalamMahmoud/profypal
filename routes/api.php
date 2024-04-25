@@ -34,21 +34,19 @@ Route::group([
 
 
 ############### start Company Routes #################
-
-Route::get('/show/{company_id}/applications', [CompanyController::class, 'show_all_applications']);
-Route::post('/create/{company_id}/application', [CompanyController::class, 'add_application']);
+Route::get('/show/applications', [CompanyController::class, 'show_all_applications']);
+Route::post('/create/application', [CompanyController::class, 'add_application']);
 Route::post('/accept/profile/{id}', [CompanyController::class, 'acceptProfile']);
 Route::post('/reject/profile/{id}', [CompanyController::class, 'rejectProfile']);
 Route::post('/ban/application/{id}', [CompanyController::class, 'ban_application']);
 Route::post('/edit/application/{id}', [CompanyController::class, 'update_application']);
 Route::post('/destroy/application/{id}', [CompanyController::class, 'destroy_application']);
-
 ############### end Company Routes #################
 
 
 ############### start user Routes #################
 Route::get('/view/applications', [UserController::class, 'view_all_posts']);
-Route::post('/update/profile/{id}', [UserController::class, 'update_profile']);
+Route::post('/update/profile', [UserController::class, 'update_profile']);
 Route::post('/apply/for/job/{application_id}', [UserController::class, 'apply_for_job']);
 Route::get('/search/company', [UserController::class, 'search_for_company']);
 ############### end user Routes #################

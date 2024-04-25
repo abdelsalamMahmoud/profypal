@@ -34,7 +34,7 @@ class UserController extends Controller
 
         $apply = ApplyFor::create([
             'application_id'=>$application_id,
-            'user_id'=>'1',
+            'user_id'=> session('user_id'),
             'cv'=>$cv,
         ]);
 
@@ -44,7 +44,7 @@ class UserController extends Controller
         return $this->apiResponse(null,'you did not apply please try again',400);
     }
 
-    public function update_profile(Request $request , $id){
+    public function update_profile(Request $request ){
         $validator = Validator::make($request->all(),[
             'Fname' => 'required|string',
             'Lname' => 'required|string',
@@ -62,7 +62,7 @@ class UserController extends Controller
             return $this->apiResponse(null,$validator->errors(),400);
         }
 
-        $user = User::find($id);
+        $user = User::find(session('user_id'));
         if (!$user){
             return $this->apiResponse(null,'the user not found',404);
         }
@@ -84,20 +84,6 @@ class UserController extends Controller
         }
 
     }
-
-//    public function search_for_company(Request $request){
-//        $search = $request->search;
-//        $result = Company::where(function ($query) use ($search){
-//            $query->where('username','like',"%$search%");
-//        })->orWhereHas('applications',function ($query) use ($search){
-//            $query->where('title','like',"%$search%");
-//        })->get();
-//
-//        if($result->isEmpty()){
-//            return $this->apiResponse(null,'there is no result',404);
-//        }
-//        return $this->apiResponse($result ,'ok',200);
-//    }
 
     public function search_for_company(Request $request) {
         $search = $request->input('search');

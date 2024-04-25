@@ -11,15 +11,15 @@ class CompanyController extends Controller
 {
     use ApiResponseTrait;
 
-    public function show_all_applications($company_id){
-        $applications = Application::where('company_id',$company_id)->get();
+    public function show_all_applications(){
+        $applications = Application::where('company_id',session('user_id'))->get();
         if($applications->isEmpty()){
             return $this->apiResponse(null,'there are no applications for this company',404);
         }
         return $this->apiResponse($applications,'ok',200);
     }
 
-    public function add_application(Request $request , $company_id){
+    public function add_application(Request $request ){
 
         $validator = Validator::make($request->all(),[
             'title'=>'required|max:255',
@@ -38,7 +38,7 @@ class CompanyController extends Controller
             'requirements'=>$request->requirements,
             'location'=>$request->location,
             'flag'=>'1',
-            'company_id'=>$company_id
+            'company_id'=>session('user_id'),
         ]);
 
         if($application){

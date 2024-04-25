@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -25,16 +26,17 @@ class AuthController extends Controller
         $credentials = $validator->validated();
         $domain = explode('@', $credentials['email'])[1];
 
-        // Attempt authentication with both guards sequentially
         $guards = ['user', 'company'];
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->attempt($credentials)) {
+                $user = Auth::guard($guard)->user();
+                session(['user_id' => $user->id]);
                 $token = Auth::guard($guard)->attempt($credentials);
-                return $this->createNewToken($token,$guard);
+                return $this->createNewToken($token, $guard);
             }
         }
-        // If authentication fails for both guards
+
         return response()->json(['error' => 'Unauthorized'], 401);
     }
 
@@ -55,7 +57,9 @@ class AuthController extends Controller
         }
         $user = User::create(array_merge(
             $validator->validated(),
-            ['password' => bcrypt($request->password)]
+            ['Fname'=>encrypt($request->Fname), //to decryption use decrypt
+             'Lname'=>encrypt($request->Lname),
+             'password' => Hash::make($request->password)]
         ));
 
         return response()->json([
@@ -79,7 +83,7 @@ class AuthController extends Controller
         }
         $user = Company::create(array_merge(
             $validator->validated(),
-            ['password' => bcrypt($request->password)]
+            ['password' => Hash::make($request->password)]
         ));
 
         return response()->json([
